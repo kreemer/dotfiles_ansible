@@ -1,0 +1,53 @@
+- name: Create local directory
+  ansible.builtin.file:
+    path: ~/.dotfiles/terminal
+    state: directory
+    mode: '0755'
+
+- name: Create file
+  ansible.builtin.file:
+    src: "{{ ansible_env.PWD }}/roles/terminal/files/profile.terminal"
+    path: ~/.dotfiles/terminal/profile.terminal
+    state: hard
+
+- name: Open file
+  ansible.builtin.command:
+    cmd: open ~/.dotfiles/terminal/profile.terminal
+
+- name: Set default window terminal
+  community.general.osx_defaults:
+    domain: com.apple.terminal
+    key: Default Window Settings
+    type: string
+    value: Monokai_Pro_(Filter_Spectrum)
+    state: present
+
+- name: Set terminal startup window
+  community.general.osx_defaults:
+    domain: com.apple.terminal
+    key: Startup Window Settings
+    type: string
+    value: Monokai_Pro_(Filter_Spectrum)
+    state: present
+
+- name: Install zsh
+  community.general.homebrew:
+    name:
+      - zsh
+    state: present
+
+- name: Install oh-my-zsh
+  ansible.builtin.command:
+    cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    creates: ~/.oh-my-zsh
+
+- name: Update .zshrc
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: ~/.zshrc
+    owner: "{{ lookup('env', 'USER') }}"
+    group: staff
+    mode: '0644'
+    backup: yes
+
+

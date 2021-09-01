@@ -1,0 +1,6 @@
+name: dotfiles
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - mkdocs-material

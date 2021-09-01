@@ -1,0 +1,44 @@
+- name: Install git
+  community.general.homebrew:
+    name:
+      - git
+    state: present
+
+- name: Install gitconfig
+  ansible.builtin.template:
+    src: gitconfig.j2
+    dest: ~/.gitconfig
+    owner: "{{ lookup('env', 'USER') }}"
+    group: staff
+    mode: '0644'
+    backup: yes
+
+- name: Install personal gitconfig
+  ansible.builtin.template:
+    src: gitconfig_personal.j2
+    dest: ~/.gitconfig_personal
+    owner: "{{ lookup('env', 'USER') }}"
+    group: staff
+    mode: '0644'
+    backup: yes
+
+- name: Install gitignore
+  ansible.builtin.template:
+    src: gitignore.j2
+    dest: ~/.gitignore
+    owner: "{{ lookup('env', 'USER') }}"
+    group: staff
+    mode: '0644'
+    backup: yes
+
+- name: Create Developer directory
+  ansible.builtin.file:
+    path: ~/Developer
+    state: directory
+    mode: '0755'
+
+- name: Create Developer/personal directory
+  ansible.builtin.file:
+    path: ~/Developer/personal
+    state: directory
+    mode: '0755'

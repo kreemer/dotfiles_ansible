@@ -1,0 +1,54 @@
+site_name: "dotfiles"
+repo_url: "https://github.com/kreemer/dotfiles"
+edit_uri: "edit/main/docs"
+repo_name: "kreemer/dotfiles"
+copyright: "Copyright &copy; 2021 Kevin Studer."
+
+nav:
+  - "Home": index.md
+
+theme:
+  name: material
+  icon:
+    logo: fontawesome/solid/chalkboard-teacher
+    repo: fontawesome/brands/github
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: orange
+      accent: orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: amber
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.expand
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+
+markdown_extensions:
+  - admonition
+  - pymdownx.betterem
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.tabbed
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/kreemer/
+
+extra_css:
+  - stylesheets/extra.css

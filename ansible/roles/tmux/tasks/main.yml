@@ -1,0 +1,25 @@
+- name: Install tmux
+  community.general.homebrew:
+    name:
+      - tmux
+    state: present
+
+- name: Checkout tmux config
+  ansible.builtin.git:
+    repo: 'https://github.com/gpakosz/.tmux.git'
+    dest: ~/.tmux
+
+- name: Install tmux config
+  ansible.builtin.file:
+    src: ~/.tmux/.tmux.conf
+    path: ~/.tmux.conf
+    state: link
+
+- name: Create tmux config
+  ansible.builtin.template:
+    src: tmux.conf.local.j2
+    dest: ~/.tmux.conf.local
+    owner: "{{ lookup('env', 'USER') }}"
+    group: staff
+    mode: '0644'
+    backup: yes
