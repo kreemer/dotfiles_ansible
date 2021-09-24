@@ -1,0 +1,9 @@
+- name: Get mac config
+  ansible.builtin.include_vars:
+    file: "config.yml"
+    name: config
+
+- name: Apply configs
+  ansible.builtin.include_tasks:
+    file: apply.yml
+  loop: "{{ config.root }}"

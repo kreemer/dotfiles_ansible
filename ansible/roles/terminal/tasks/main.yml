@@ -9,10 +9,12 @@
     src: "{{ ansible_env.PWD }}/roles/terminal/files/profile.terminal"
     path: ~/.dotfiles/terminal/profile.terminal
     state: hard
+  register: profile
 
 - name: Open file
   ansible.builtin.command:
     cmd: open ~/.dotfiles/terminal/profile.terminal
+  when: profile.changed
 
 - name: Set default window terminal
   community.general.osx_defaults:

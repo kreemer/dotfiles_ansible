@@ -1,0 +1,34 @@
+- name: Create local directory
+  ansible.builtin.file:
+    path: ~/.dotfiles/wm
+    state: directory
+    mode: '0755'
+
+- name: Create config directory
+  ansible.builtin.file:
+    path: ~/.config/yabai
+    state: directory
+    mode: '0755'
+
+- name: Copy scripts
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/wm/files/scripts/"
+    dest: ~/.dotfiles/wm
+    mode: a+x
+
+- name: Install wm
+  community.general.homebrew:
+    name:
+      - yabai
+      - skhd
+    state: present
+
+- name: Copy skhd config
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/wm/files/skhdrc"
+    dest: ~/.skhdrc
+
+- name: Copy yabai config
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/wm/files/yabairc"
+    dest: ~/.config/yabai/yabairc

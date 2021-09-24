@@ -6,6 +6,8 @@ copyright: "Copyright &copy; 2021 Kevin Studer."
 
 nav:
   - "Home": index.md
+  - "Cheatsheets":
+      - "keymap": cheatsheets/keymap.md
 
 theme:
   name: material

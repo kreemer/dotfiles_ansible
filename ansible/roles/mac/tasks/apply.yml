@@ -1,0 +1,7 @@
+- name: "{{ item.description|default('Setting ' + item.domain + '.' + item.key + ' to ' + (item.value|string)) }}"
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type | default('string') }}"
+    value: "{{ item.value }}"
+    state: "{{ item.state | default('present') }}"
