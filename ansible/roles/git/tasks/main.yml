@@ -42,3 +42,9 @@
     path: ~/Developer/personal
     state: directory
     mode: '0755'
+
+- name: Install gh
+  community.general.homebrew:
+    name:
+      - gh
+    state: present
