@@ -52,4 +52,23 @@
     mode: '0644'
     backup: yes
 
+- name: Install iTerm2
+  community.general.homebrew_cask:
+    name:
+      - iterm2
+      - homebrew/cask-fonts/font-hack
+    state: present
 
+- name: Checkout iTerm2 Theme
+  ansible.builtin.git:
+    repo: 'https://github.com/mbadolato/iTerm2-Color-Schemes.git'
+    dest: ~/.dotfiles/terminal/iterm2-color-schemes
+
+- name: Import theme
+  ansible.builtin.command:
+    cmd: ~/.dotfiles/terminal/iterm2-color-schemes/tools/import-scheme.sh 'DimmedMonokai'
+
+- name: Save profile
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/terminal/files/com.googlecode.iterm2.plist"
+    dest: ~/Library/Preferences/com.googlecode.iterm2.plist

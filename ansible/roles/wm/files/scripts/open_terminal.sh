@@ -1,3 +1,3 @@
 #!/bin/bash
 
-open /System/Applications/Utilities/Terminal.app
+open /Applications/iTerm.app

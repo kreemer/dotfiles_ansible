@@ -4,22 +4,27 @@
       - neovim
     state: present
 
-- name: Checkout awesome vimrc
-  ansible.builtin.git:
-    repo: 'https://github.com/amix/vimrc.git'
-    dest: ~/.vim_runtime
-    depth: 1
+- name: Create config directory
+  ansible.builtin.file:
+    path: ~/.config/nvim
+    state: directory
+    mode: '0755'
 
-- name: Install awesome vimrc
-  ansible.builtin.command:
-    cmd: sh ~/.vim_runtime/install_awesome_vimrc.sh
-    creates: ~/.vimrc
+- name: Copy files
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/nvim/files/"
+    dest: ~/.config/nvim/
 
-- name: Install vimrc config
-  ansible.builtin.template:
-    src: my_configs.vim.j2
-    dest: ~/.vim_runtime/my_configs.vim
-    owner: "{{ lookup('env', 'USER') }}"
-    group: staff
-    mode: '0644'
-    backup: yes
+
+- name: Install vimplug
+  ansible.builtin.shell:
+    cmd: sh -c 'curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+
+- name: Install intelephense lsp
+  ansible.builtin.shell:
+    cmd: npm install -g intelephense
+
+
+
+

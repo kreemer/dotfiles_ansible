@@ -37,6 +37,12 @@
       - cmacrae/formulae/spacebar
     state: present
 
+- name: Install font
+  community.general.homebrew_cask:
+    name:
+      - homebrew/cask-fonts/font-hasklug-nerd-font
+    state: present
+
 - name: Copy Spacebar config
   ansible.builtin.copy:
     src: "{{ ansible_env.PWD }}/roles/wm/files/spacebarrc"

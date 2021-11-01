@@ -3,9 +3,9 @@
   roles:
     #- mac
     - wm
-    - terminal
-    - tmux
+    #- terminal
+    #- tmux
     - nvim
-    - git
-    - teams
-    - phpstorm
+    #- git
+    #- teams
+    #- phpstorm
