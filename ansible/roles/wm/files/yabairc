@@ -59,6 +59,7 @@ yabai -m config auto_balance                off
 yabai -m config mouse_modifier              fn
 yabai -m config mouse_action1               move
 yabai -m config mouse_action2               resize
+yabai -m config external_bar                all:26:0
 
 # ===== Rules ==================================
 
@@ -76,7 +77,9 @@ yabai -m rule --add label="Software Update" title="Software Update" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="XCOM 2" app="^XCOM.*$" manage=off
 yabai -m rule --add label="Microsoft Teams" app="Microsoft Teams" title="Microsoft Teams Notification" manage=off
-yabai -m rule --add label="PhpStorm" app="PhpStorm" title="Preferences" manage=off
+yabai -m rule --add label="PhpStorm" app="PhpStorm" title=".*Welcome*.|Checkout*.|.*Configurations|Choose*.|Import*.|.*Charges|Tip*.|Rename*.|Preferences" manage=off
+
+
 
 # ===== Signals ================================
 

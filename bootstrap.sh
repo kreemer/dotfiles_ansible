@@ -15,4 +15,4 @@ gcc --version
 # Install ansible
 brew install ansible
 
-ansible-playbook -i ansible/hosts ansible/roles.yml
+./run.sh

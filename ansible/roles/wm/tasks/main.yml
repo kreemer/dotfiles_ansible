@@ -4,9 +4,16 @@
     state: directory
     mode: '0755'
 
-- name: Create config directory
+- name: Create yabai config directory
   ansible.builtin.file:
     path: ~/.config/yabai
+    state: directory
+    mode: '0755'
+
+
+- name: Create spacebar config directory
+  ansible.builtin.file:
+    path: ~/.config/spacebar
     state: directory
     mode: '0755'
 
@@ -22,6 +29,23 @@
       - yabai
       - skhd
     state: present
+
+
+- name: Install Spacebar
+  community.general.homebrew:
+    name:
+      - cmacrae/formulae/spacebar
+    state: present
+
+- name: Copy Spacebar config
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/wm/files/spacebarrc"
+    dest: ~/.config/spacebar/spacebarrc
+
+
+- name: Start Spacebar
+  command: /usr/local/bin/brew services start spacebar
+  when: ansible_os_family == "Darwin"
 
 - name: Copy skhd config
   ansible.builtin.copy:

@@ -14,8 +14,8 @@ alt - j : yabai -m window --focus south || yabai -m display --focus south
 alt - k : yabai -m window --focus north || yabai -m display --focus north
 alt - l : yabai -m window --focus east || yabai -m display --focus east
 
-fn + alt - h : yabai -m space --focus prev
-fn + alt - l : yabai -m space --focus next
+lctrl - h : yabai -m space --focus prev
+lctrl - l : yabai -m space --focus next
 
 cmd - j : yabai -m window --focus prev
 cmd - k : yabai -m window --focus next
@@ -26,8 +26,8 @@ shift + alt - h : yabai -m window --warp west || (yabai -m window --display west
 shift + alt - j : yabai -m window --warp south || (yabai -m window --display south && yabai -m display --focus south)
 shift + alt - k : yabai -m window --warp north || (yabai -m window --display north && yabai -m display --focus north)
 shift + alt - l : yabai -m window --warp east || (yabai -m window --display east && yabai -m display --focus east)
-fn + shift + alt - h : yabai -m window --space prev; yabai -m space --focus prev
-fn + shift + alt - l : yabai -m window --space next; yabai -m space --focus next
+lctrl + shift + alt - h : yabai -m window --space prev; yabai -m space --focus prev
+lctrl + shift + alt - l : yabai -m window --space next; yabai -m space --focus next
 
 # Resize windows
 lctrl + alt - h : yabai -m window --resize left:-50:0; \
@@ -85,4 +85,7 @@ cmd + alt - n : yabai -m space --create;\
                 yabai -m window --space $(echo $id);\
                 yabai -m space --focus $(echo $id)
 
+
+
+cmd + alt - w : yabai -m space --destroy
 
