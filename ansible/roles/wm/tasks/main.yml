@@ -26,7 +26,7 @@
 - name: Install wm
   community.general.homebrew:
     name:
-      - yabai
+      - koekeishiya/formulae/yabai
       - skhd
     state: present
 
@@ -50,7 +50,7 @@
 
 
 - name: Start Spacebar
-  command: /usr/local/bin/brew services start spacebar
+  command: /usr/local/bin/brew services stop spacebar
   when: ansible_os_family == "Darwin"
 
 - name: Copy skhd config
@@ -62,3 +62,19 @@
   ansible.builtin.copy:
     src: "{{ ansible_env.PWD }}/roles/wm/files/yabairc"
     dest: ~/.config/yabai/yabairc
+
+- name: Install yabai scripting addition
+  ansible.builtin.command:
+    cmd: yabai --install-sa 
+  ignore_errors: true
+
+- name: Start brew service yabai
+  ansible.builtin.command:
+    cmd: /usr/local/bin/brew services stop yabai
+  when: ansible_os_family == "Darwin"
+
+- name: Start brew service skhd
+  ansible.builtin.command:
+    cmd: /usr/local/bin/brew services stop skhd
+  when: ansible_os_family == "Darwin"
+

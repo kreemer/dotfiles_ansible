@@ -50,7 +50,7 @@ vim.api.nvim_command("cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline(
 -- correct :Q to :q typo
 vim.api.nvim_command("cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))")
 -- save buffer with control + w
-nnoremap { '<c-s>', ':w<cr>' }
+-- nnoremap { '<c-s>', ':w<cr>' }
 
 
 -- Plugins custom mapping
@@ -63,9 +63,9 @@ nmap { '<C-t>', ':SymbolsOutline<CR>' }
 -- Search in the project files
 nmap { '<leader>f', ':Rg<space>' }
 -- File list with fzf
-nmap { '<leader>x', ':FzfLua files<CR>' }
+nmap { '<leader>x', ':Telescope find_files<CR>' }
 -- Search on file with fzf
-nmap { '<leader>g', ':FzfLua lines<CR>' }
+-- nmap { '<leader>g', ':Telescope live_grep<CR>' }
 -- Jump to definition under cursor
 nmap { '<leader>j', '<cmd>lua vim.lsp.buf.definition()<cr>' }
 -- navigate between errors

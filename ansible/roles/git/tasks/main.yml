@@ -2,21 +2,13 @@
   community.general.homebrew:
     name:
       - git
+      - diff-so-fancy
     state: present
 
 - name: Install gitconfig
   ansible.builtin.template:
     src: gitconfig.j2
     dest: ~/.gitconfig
-    owner: "{{ lookup('env', 'USER') }}"
-    group: staff
-    mode: '0644'
-    backup: yes
-
-- name: Install personal gitconfig
-  ansible.builtin.template:
-    src: gitconfig_personal.j2
-    dest: ~/.gitconfig_personal
     owner: "{{ lookup('env', 'USER') }}"
     group: staff
     mode: '0644'
@@ -33,13 +25,19 @@
 
 - name: Create Developer directory
   ansible.builtin.file:
-    path: ~/Developer
+    path: ~/Code
+    state: directory
+    mode: '0755'
+
+- name: Create Developer/work directory
+  ansible.builtin.file:
+    path: ~/Code/UB
     state: directory
     mode: '0755'
 
 - name: Create Developer/personal directory
   ansible.builtin.file:
-    path: ~/Developer/personal
+    path: ~/Code/kreemer
     state: directory
     mode: '0755'
 

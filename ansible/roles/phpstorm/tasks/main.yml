@@ -1,5 +1,0 @@
-- name: Install phpstorm
-  community.general.homebrew_cask:
-    name:
-      - phpstorm
-    state: present

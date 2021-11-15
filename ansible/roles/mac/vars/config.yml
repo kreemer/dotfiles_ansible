@@ -72,8 +72,8 @@ root:
   - description: enable tap to click for this user and for the login screen
     domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: Clicking
-    type: bool
-    value: true
+    type: int
+    value: 1
 
   - description: enable tap to click for this user and for the login screen
     domain: NSGlobalDomain
@@ -96,6 +96,12 @@ root:
   - description: Disable auto-correct
     domain: NSGlobalDomain
     key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+
+  - description: Disable natural scroll
+    domain: NSGlobalDomain
+    key: com.apple.swipescrolldirection
     type: bool
     value: false
 

@@ -16,12 +16,10 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'folke/trouble.nvim'
 
-
-
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'BurntSushi/ripgrep'
   Plug 'nvim-telescope/telescope.nvim'
 
   Plug 'goolord/alpha-nvim'
@@ -36,4 +34,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
   Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps'}
+
+  Plug 'tanvirtin/monokai.nvim'
 call plug#end()

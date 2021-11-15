@@ -1,0 +1,36 @@
+- name: Install php
+  community.general.homebrew:
+    name:
+      - php@7.4
+      - yarn
+      - composer
+      - phpstan
+      - phpunit
+      - php-cs-fixer
+      - python3
+      - pkg-config
+      - imagemagick
+    state: present
+
+- name: Download symfony-cli
+  ansible.builtin.get_url:
+    url: https://get.symfony.com/cli/installer
+    dest: /tmp/symfony-installer
+
+- name: Install symfony-cli
+  ansible.builtin.command:
+    cmd: bash /tmp/symfony-installer
+
+- name: Copy to system location
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'HOME') }}/.symfony/bin/symfony"
+    dest: "/usr/local/bin/symfony"
+    owner: kreemer
+    group: admin
+    mode: '0755'
+
+- name: Install phpstorm
+  community.general.homebrew_cask:
+    name:
+      - phpstorm
+    state: present

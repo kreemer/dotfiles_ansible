@@ -7,3 +7,7 @@
   ansible.builtin.include_tasks:
     file: apply.yml
   loop: "{{ config.root }}"
+
+- name: Restart Finder 
+  ansible.builtin.command:
+    cmd: killall Dock && killall Finder

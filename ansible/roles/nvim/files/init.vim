@@ -2,6 +2,10 @@ source $HOME/.config/nvim/plug.vim
 
 let mapleader=","
 
+lua << EOF
+require'lua'
+EOF
+
 function s:chadOpen()
   CHADopen
   if argc() > 0  || exists("s:std_in")
@@ -13,8 +17,5 @@ endfunction
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * call s:chadOpen()
 
-lua << EOF
-require'lua'
-EOF
 
-
+set noautochdir
