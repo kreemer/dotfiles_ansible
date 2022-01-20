@@ -1,0 +1,32 @@
+name = "Kevin Studer"
+downloads-dir = "~/Downloads"
+default-page-size = 50
+notify-cmd = "~/.config/himalaya/notify.sh"
+
+[unibe]
+default = true
+email = "kevin.studer@unibe.ch"
+
+imap-host = "localhost"
+imap-port = 10993
+imap-login = "kevin.studer@unibe.ch"
+imap-passwd-cmd = "echo '{{ accountUnibePassword }}'"
+imap-insecure = true
+
+smtp-host = "mail.campus.unibe.ch"
+smtp-port = 587
+smtp-login = "kevin.studer@unibe.ch"
+smtp-passwd-cmd = "security find-generic-password -w -s 'mail.campus.unibe.ch' -a 'kevin.studer@unibe.ch'"
+
+[unibe-watch]
+email = "kevin.studer@unibe.ch"
+
+imap-host = "mail.campus.unibe.ch"
+imap-port = 993
+imap-login = "kevin.studer@unibe.ch"
+imap-passwd-cmd = "security find-generic-password -w -s 'mail.campus.unibe.ch' -a 'kevin.studer@unibe.ch'"
+
+smtp-host = "mail.campus.unibe.ch"
+smtp-port = 587
+smtp-login = "kevin.studer@unibe.ch"
+smtp-passwd-cmd = "security find-generic-password -w -s 'mail.campus.unibe.ch' -a 'kevin.studer@unibe.ch'"

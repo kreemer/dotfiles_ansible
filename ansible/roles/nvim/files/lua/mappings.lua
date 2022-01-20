@@ -88,3 +88,7 @@ nnoremap { 'confr', ':source $MYVIMRC<CR>' }
 -- Split code in line to different lines
 nmap { '<leader>s', ':SplitjoinSplit<cr>' }
 nmap { '<leader>q', ':TroubleToggle<cr>' }
+
+
+
+nmap { 'gDD', '<plug>(himalaya-msg-delete)' }

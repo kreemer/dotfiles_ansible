@@ -1,4 +1,4 @@
-- name: Install 1Password
+- name: Install Tools
   community.general.homebrew_cask:
     name:
       - 1password
@@ -6,4 +6,9 @@
       - playonmac 
       - discord
       - plexamp
+      - nextcloud
+      - tiled
+      - visual-studio-code
+      - steam
+      - obsidian
     state: present

@@ -1,12 +1,13 @@
 - name: Setup local environment
   hosts: localhost
   roles:
-    - mac
-    - wm
+    #- mac
+    #- wm
     - terminal
-    - tmux
-    - nvim
-    - git
-    - teams
-    - code
-    - tool
+    #- tmux
+    #- nvim
+    #- git
+    #- teams
+    #- code
+    #- tool
+    - office

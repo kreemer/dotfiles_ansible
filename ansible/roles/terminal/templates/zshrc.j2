@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-completions my-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,11 +103,25 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi="nvim"
 alias vim="nvim"
-
+alias ls="gls --color"
+alias ll="gls -lh --color"
+export LS_COLORS="$(vivid generate molokai)"
 
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
-  exec tmux
+   
+    #tmux has-session -t development
+    #if [ $? != 0 ]; then
+    #    tmux new-session -s development -n editor -d
+    #    tmux send-keys -t development 'cd ~/Code' C-m
+    #    tmux split-window -v -t development
+    #    tmux split-window -v -t development
+    #    tmux select-layout -t development main-horizontal
+    #    tmux new-window -n console -t development
+    #    tmux select-window -t development:0
+    #fi
+    tmux attach -t TMUX || tmux new -s TMUX -d && tmux send-keys -t TMUX 'clear && neofetch' C-m && tmux attach -t TMUX
+
 fi
 
 [ -z "$SSH_AUTH_SOCK"  ] && eval "$(ssh-agent -s)"

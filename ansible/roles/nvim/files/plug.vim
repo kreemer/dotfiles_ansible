@@ -35,5 +35,8 @@ call plug#begin(stdpath('data') . '/plugged')
 
   Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps'}
 
-  Plug 'tanvirtin/monokai.nvim'
+  Plug 'crusoexia/vim-monokai'
+  Plug 'soywod/himalaya', {'rtp': 'vim'}
+
+  Plug 'c9s/phpunit.vim'
 call plug#end()

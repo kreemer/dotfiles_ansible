@@ -1,0 +1,141 @@
+- name: Install office utilities
+  community.general.homebrew:
+    name:
+      - himalaya
+      - fzf
+      - jq
+      - offlineimap
+      - pass
+    state: present
+
+- name: Create mail directory
+  ansible.builtin.file:
+    path: ~/.local/share/mail
+    state: directory
+    mode: '0755'
+
+
+- name: Create mail unibe directory
+  ansible.builtin.file:
+    path: ~/.local/share/mail/kevin.studer@unibe.ch
+    state: directory
+    mode: '0755'
+
+- name: Create config directory
+  ansible.builtin.file:
+    path: ~/.config/offlineimap
+    state: directory
+    mode: '0755'
+
+- name: Copy offlineimap configuration
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/office/files/offlineimap.conf"
+    dest: ~/.config/offlineimap/config
+
+
+- name: Copy offlineimap password script
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/office/files/offlineimap-password.py"
+    dest: ~/.config/offlineimap/password.py
+
+
+- name: Start offlineimap service
+  ansible.builtin.shell:
+    cmd: brew services restart offlineimap
+
+
+- name: Install python docker module
+  ansible.builtin.shell:
+    cmd: pip3 install docker
+
+
+- name: Create config directory
+  ansible.builtin.file:
+    path: ~/.config/dovecot
+    state: directory
+    mode: '0755'
+
+- name: Copy config file
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/office/files/dovecot.conf"
+    dest: ~/.config/dovecot/dovecot.conf
+
+- name: Check if users file exists
+  stat:
+    path: ~/.config/dovecot/users
+  register: stat_users
+
+- name: Generate local password
+  set_fact:
+    accountUnibePassword: "{{ lookup('community.general.random_string', base64=True) }}"
+  when: not stat_users.stat.exists
+
+- name: Retrieve local password
+  ansible.builtin.shell:
+    cmd: cat ~/.config/dovecot/users | sed -n "s/^kevin.studer@unibe.ch:{plain}\(.*\)::::::$/\1/p"
+  when: stat_users.stat.exists
+  register: accountUnibePasswordStdout
+
+- name: Retrieve local password
+  set_fact:
+    accountUnibePassword: "{{ accountUnibePasswordStdout.stdout }}"
+  when: stat_users.stat.exists
+
+- name: Install users
+  ansible.builtin.template:
+    src: users.j2
+    dest: ~/.config/dovecot/users
+    owner: "{{ lookup('env', 'USER') }}"
+    mode: '0644'
+  #when: not stat_users.stat.exists
+
+- name: Create local dovecot
+  community.docker.docker_container:
+    name: dovecot
+    image: dovecot/dovecot
+    restart: yes
+    volumes:
+      - ~/.config/dovecot/dovecot.conf:/etc/dovecot/dovecot.conf
+      - ~/.config/dovecot/users:/etc/dovecot/users
+      - ~/.local/share/mail:/srv/mail
+    ports: 
+      - 10993:993
+
+- name: Create config directory
+  ansible.builtin.file:
+    path: ~/.config/himalaya
+    state: directory
+    mode: '0755'
+
+
+- name: Copy config file
+  ansible.builtin.template:
+    src: himalaya.toml.j2
+    dest: ~/.config/himalaya/config.toml
+    owner: "{{ lookup('env', 'USER') }}"
+    mode: '0644'
+
+- name: Copy notify script
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/office/files/notify.sh"
+    dest: ~/.config/himalaya/notify.sh
+    mode: '0755'
+
+- name: Deploy custom himalaya notify job definition
+  ansible.builtin.template:
+    src: himalaya-service.plist.j2
+    dest: ~/Library/LaunchAgents/himalaya-notify.plist
+
+- name: Run himalaya
+  community.general.launchd:
+    name: himalaya-notify
+    state: started
+
+- name: Export completion
+  ansible.builtin.shell:
+    cmd: himalaya completion zsh > ~/.oh-my-zsh/custom/plugins/my-completions/src/_himalaya
+    
+- name: Export completion
+  ansible.builtin.shell:
+    executable: /bin/zsh
+    cmd: autoload -U compinit && compinit

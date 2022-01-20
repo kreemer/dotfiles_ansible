@@ -1,14 +1,24 @@
+- name: Install zsh
+  community.general.homebrew:
+    name:
+      - zsh
+      - vivid
+      - coreutils
+    state: present
+
+- name: Install iTerm2
+  community.general.homebrew_cask:
+    name:
+      - iterm2
+      - homebrew/cask-fonts/font-hack
+    state: present
+
+
 - name: Create local directory
   ansible.builtin.file:
     path: ~/.dotfiles/terminal
     state: directory
     mode: '0755'
-
-- name: Install zsh
-  community.general.homebrew:
-    name:
-      - zsh
-    state: present
 
 - name: Download oh-my-zsh installer
   ansible.builtin.get_url:
@@ -29,13 +39,6 @@
     mode: '0644'
     backup: yes
 
-- name: Install iTerm2
-  community.general.homebrew_cask:
-    name:
-      - iterm2
-      - homebrew/cask-fonts/font-hack
-    state: present
-
 - name: Checkout iTerm2 Theme
   ansible.builtin.git:
     repo: 'https://github.com/mbadolato/iTerm2-Color-Schemes.git'
@@ -49,3 +52,26 @@
   ansible.builtin.copy:
     src: "{{ ansible_env.PWD }}/roles/terminal/files/com.googlecode.iterm2.plist"
     dest: ~/Library/Preferences/com.googlecode.iterm2.plist
+
+
+- name: Install zsh-completions
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-completions'
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
+
+- name: Create my-completions plugin
+  ansible.builtin.file:
+    path: ~/.oh-my-zsh/custom/plugins/my-completions
+    state: directory
+    mode: '0755'
+
+- name: Create my-completions src plugin
+  ansible.builtin.file:
+    path: ~/.oh-my-zsh/custom/plugins/my-completions/src
+    state: directory
+    mode: '0755'
+
+- name: Copy my-completions plugin
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/terminal/files/my-completions.plugin.zsh"
+    dest: ~/.oh-my-zsh/custom/plugins/my-completions/my-completions.plugin.zsh

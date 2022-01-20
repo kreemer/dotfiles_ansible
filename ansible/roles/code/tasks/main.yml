@@ -12,6 +12,10 @@
       - imagemagick
     state: present
 
+- name: Install xdebug
+  ansible.builtin.command:
+    cmd: pecl install xdebug
+
 - name: Download symfony-cli
   ansible.builtin.get_url:
     url: https://get.symfony.com/cli/installer
@@ -33,4 +37,11 @@
   community.general.homebrew_cask:
     name:
       - phpstorm
+    state: present
+
+
+- name: Install docker 
+  community.general.homebrew_cask:
+    name:
+      - docker
     state: present

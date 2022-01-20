@@ -15,6 +15,7 @@ dashboard.section.header.val = {
 
 -- Set menu
 dashboard.section.buttons.val = {
+    dashboard.button( "h", "⛰  > Himalaya" , ":ene <BAR> Himalaya <CR>"),
     dashboard.button( "e", "  > New file" , ":ene <BAR> startinsert <CR>"),
     dashboard.button( "f", "  > Find file", ":cd $HOME/Developer | Telescope find_files<CR>"),
     dashboard.button( "r", "  > Recent"   , ":Telescope oldfiles<CR>"),

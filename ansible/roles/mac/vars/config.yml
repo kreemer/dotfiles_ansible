@@ -189,7 +189,7 @@ root:
     domain: com.apple.dock
     key: show-process-indicators
     type: bool
-    value: false
+    value: true
 
   - description: Speed up Mission Control animations
     domain: com.apple.dock
