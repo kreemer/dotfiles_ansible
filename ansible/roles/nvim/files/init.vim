@@ -31,15 +31,10 @@ set termguicolors
 " PHP File options
 autocmd FileType php call SetPHPOptions()
 function! SetPHPOptions()
-setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab makeprg=php-xdebug\ %
+    setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab makeprg=php-xdebug\ %
     :call tagbar#autoopen(0)
 endfunction
 
+let g:quickui_color_scheme = 'gruvbox'
 
-fun! ShowFuncName()
-  echohl ModeMsg
-  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bWn'))
-  echohl None
-endfun
 
-map f :call ShowFuncName() <CR>

@@ -44,9 +44,12 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'skywind3000/asyncrun.vim'
   Plug 'skywind3000/vim-quickui'
 
+
   Plug 'itchyny/lightline.vim'
   Plug 'majutsushi/tagbar'
 
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'vim-php/phpctags', {'do': 'composer install' }
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'rcarriga/nvim-dap-ui'
 call plug#end()

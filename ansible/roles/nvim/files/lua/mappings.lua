@@ -70,8 +70,7 @@ nmap { '<C-t>', ':SymbolsOutline<CR>' }
 -- nmap { '<leader>f', ':Rg<space>' }
 -- File list with fzf
 nmap { '<leader>x', ':Telescope find_files<CR>' }
--- Search on file with fzf
--- nmap { '<leader>g', ':Telescope live_grep<CR>' }
+nmap { '<leader>g', ':Telescope live_grep<CR>' }
 -- Jump to definition under cursor
 nmap { '<leader>j', '<cmd>lua vim.lsp.buf.definition()<cr>' }
 -- navigate between errors
@@ -81,11 +80,12 @@ nmap { '<leader>j', '<cmd>lua vim.lsp.buf.definition()<cr>' }
 -- Append ; to the end of the line -> Leader+B
 -- map { '<leader>b', ":call setline('.', getline('.') . ';')<CR>" }
 -- DAP
-nnoremap { '<F5>', ":lua require'dap'.toggle_breakpoint()<CR>" }
-nnoremap { '<F6>', ":lua require'dap'.continue()<CR>" }
-nnoremap { '<F10>', ":lua require'dap'.step_over()<CR>" }
-nnoremap { '<F11>', ":lua require'dap'.step_into()<CR>" }
-nnoremap { '<F12>', ":lua require'dap'.step_out()<CR>" }
+nnoremap { '<leader>db', ":lua require'dap'.toggle_breakpoint()<CR>" }
+nnoremap { '<leader>dc', ":lua require'dap'.continue()<CR>" }
+nnoremap { '<leader>ds', ":lua require'dap'.step_over()<CR>" }
+nnoremap { '<leader>di', ":lua require'dap'.step_into()<CR>" }
+nnoremap { '<leader>do', ":lua require'dap'.step_out()<CR>" }
+nnoremap { '<leader>dt', ":lua require'dapui'.toggle()<CR>" }
 -- https://www.cyberciti.biz/faq/how-to-reload-vimrc-file-without-restarting-vim-on-linux-unix/
 -- Edit vimrc configuration file
 nnoremap { 'confe', ':e $MYVIMRC<CR>' }
