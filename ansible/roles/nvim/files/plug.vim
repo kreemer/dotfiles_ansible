@@ -39,4 +39,14 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'soywod/himalaya', {'rtp': 'vim'}
 
   Plug 'c9s/phpunit.vim'
+
+
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'skywind3000/vim-quickui'
+
+  Plug 'itchyny/lightline.vim'
+  Plug 'majutsushi/tagbar'
+
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'vim-php/phpctags', {'do': 'composer install' }
 call plug#end()

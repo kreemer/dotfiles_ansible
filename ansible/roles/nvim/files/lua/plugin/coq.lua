@@ -16,6 +16,11 @@ vim.g.coq_settings = {
           weight_adjust = 1.4
         },
     },
+    keymap = {
+        recommended = true,
+        bigger_preview = "<c-i>",
+        jump_to_mark = "<c-o>",
+    },
 }
 
 local coq = require("coq")

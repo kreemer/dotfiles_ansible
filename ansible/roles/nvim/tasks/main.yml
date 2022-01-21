@@ -6,6 +6,42 @@
       - fd
     state: present
 
+- name: Install ctags
+  community.general.homebrew:
+    name:
+      - universal-ctags/universal-ctags/universal-ctags
+    state: head
+
+- name: Install node
+  community.general.homebrew:
+    name:
+      - node
+    state: present
+
+
+
+- name: Create local directory
+  ansible.builtin.file:
+    path: ~/.local
+    state: directory
+    mode: '0755'
+
+- name: Create share directory
+  ansible.builtin.file:
+    path: ~/.local/share
+    state: directory
+    mode: '0755'
+
+- name: Install vscode-php-debug  
+  ansible.builtin.git:
+    repo: 'git@github.com:xdebug/vscode-php-debug.git'
+    dest: ~/.local/share/vscode-php-debug
+    version: v1.22.0
+
+- name: Execute vscode-php-debug install
+  ansible.builtin.shell:
+    cmd: 'cd ~/.local/share/vscode-php-debug && npm install && npm run build'
+
 - name: Create config directory
   ansible.builtin.file:
     path: ~/.config/nvim

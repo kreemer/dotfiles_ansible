@@ -52,6 +52,12 @@ vim.api.nvim_command("cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline(
 -- save buffer with control + w
 -- nnoremap { '<c-s>', ':w<cr>' }
 
+-- Pane navigation
+nnoremap { '<C-J>', '<C-W>j' }
+nnoremap { '<C-K>', '<C-W>k' }
+nnoremap { '<C-L>', '<C-W>l' }
+nnoremap { '<C-H>', '<C-W>h' }
+
 
 -- Plugins custom mapping
 -- Open Folder tab current directory
@@ -61,7 +67,7 @@ nmap { '<expr> <2-LeftMouse>', 'za' }
 -- Object view
 nmap { '<C-t>', ':SymbolsOutline<CR>' }
 -- Search in the project files
-nmap { '<leader>f', ':Rg<space>' }
+-- nmap { '<leader>f', ':Rg<space>' }
 -- File list with fzf
 nmap { '<leader>x', ':Telescope find_files<CR>' }
 -- Search on file with fzf
@@ -69,11 +75,11 @@ nmap { '<leader>x', ':Telescope find_files<CR>' }
 -- Jump to definition under cursor
 nmap { '<leader>j', '<cmd>lua vim.lsp.buf.definition()<cr>' }
 -- navigate between errors
-nmap { '<C-k>', ':ALEPreviousWrap<CR>' }
-nmap { '<C-j>', ':ALENextWrap<CR>' }
-nmap { '<C-q>', ':ALEFix<CR>' }
+-- nmap { '<C-k>', ':ALEPreviousWrap<CR>' }
+-- nmap { '<C-j>', ':ALENextWrap<CR>' }
+-- nmap { '<C-q>', ':ALEFix<CR>' }
 -- Append ; to the end of the line -> Leader+B
-map { '<leader>b', ":call setline('.', getline('.') . ';')<CR>" }
+-- map { '<leader>b', ":call setline('.', getline('.') . ';')<CR>" }
 -- DAP
 nnoremap { '<F5>', ":lua require'dap'.toggle_breakpoint()<CR>" }
 nnoremap { '<F6>', ":lua require'dap'.continue()<CR>" }
@@ -91,4 +97,4 @@ nmap { '<leader>q', ':TroubleToggle<cr>' }
 
 
 
-nmap { 'gDD', '<plug>(himalaya-msg-delete)' }
+nmap { '<leader>b', ':TagbarToggle<CR>'}
