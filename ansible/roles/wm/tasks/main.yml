@@ -19,7 +19,7 @@
 - name: Install skhd
   community.general.homebrew:
     name:
-      - skhd
+      - koekeishiya/formulae/skhd
     state: present
 
 - name: Copy skhd config

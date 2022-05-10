@@ -4,6 +4,12 @@
     path: "{{ lookup('env', 'HOME') }}/.local/bin/lvim"
   register: lvim
 
+- name: Install neovim
+  community.general.homebrew:
+    name:
+      - neovim
+    state: present
+
 - name: Download lvim install
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh
@@ -27,6 +33,6 @@
 
 - name: Update lunarvim
   ansible.builtin.shell:
-    cmd: lvim +LvimUpdate +PackerUpdate +LvimSyncCorePlugins +q
+    cmd: ~/.local/bin/lvim +LvimUpdate +PackerUpdate +LvimSyncCorePlugins +q
 
 

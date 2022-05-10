@@ -1,9 +1,9 @@
 root:
-  - description: "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
-    domain: /Library/Preferences/com.apple.loginwindow
-    key: AdminHostInfo
-    type: string
-    value: HostName
+#  - description: "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
+#    domain: /Library/Preferences/com.apple.loginwindow
+#    key: AdminHostInfo
+#    type: string
+#    value: HostName
 
   - description: Increase window resize speed for Cocoa applications
     domain: NSGlobalDomain

@@ -1,2 +1,3 @@
 # opens Terminal
-cmd - return : osascript "${HOME}"/.dotfiles/wm/open_kitty.scpt
+cmd - return : /Applications/kitty.app/Contents/MacOS/kitty 
+--single-instance -d ~
