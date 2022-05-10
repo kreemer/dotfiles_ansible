@@ -11,3 +11,15 @@
 - name: Restart Finder 
   ansible.builtin.command:
     cmd: killall Dock && killall Finder
+
+- name: Install mas
+  community.general.homebrew:
+    name:
+      - mas
+    state: present
+
+- name: Install vimari
+  community.general.mas:
+    id: 
+      - 1480933944
+      

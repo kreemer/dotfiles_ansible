@@ -9,3 +9,8 @@
       - visual-studio-code
       - steam
     state: present
+
+- name: Install macos tools
+  community.general.mas:
+    id:
+      - 1569813296

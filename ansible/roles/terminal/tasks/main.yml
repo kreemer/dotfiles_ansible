@@ -9,7 +9,6 @@
       - oh-my-posh
       - bat
       - exa
-      - mas
       - tldr
     state: present
 
