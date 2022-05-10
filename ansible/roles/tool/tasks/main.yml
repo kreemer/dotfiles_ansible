@@ -3,12 +3,9 @@
     name:
       - 1password
       - forticlient-vpn
-        #      - playonmac 
       - discord
       - plexamp
       - nextcloud
-        #- tiled
       - visual-studio-code
-        #- steam
-        #- obsidian
+      - steam
     state: present

@@ -12,6 +12,18 @@
       - imagemagick
     state: present
 
+- name: Install virtualbox
+  community.general.homebrew_cask:
+    name:
+      - virtualbox
+    state: present
+
+- name: Install vagrant
+  community.general.homebrew:
+    name:
+      - vagrant
+    state: present
+
 - name: Install xdebug
   community.general.pear:
     name: pecl/xdebug
