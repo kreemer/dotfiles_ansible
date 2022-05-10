@@ -4,16 +4,9 @@
     state: directory
     mode: '0755'
 
-- name: Create yabai config directory
+- name: Create skhd config directory
   ansible.builtin.file:
-    path: ~/.config/yabai
-    state: directory
-    mode: '0755'
-
-
-- name: Create spacebar config directory
-  ansible.builtin.file:
-    path: ~/.config/spacebar
+    path: ~/.config/skhd
     state: directory
     mode: '0755'
 
@@ -23,55 +16,16 @@
     dest: ~/.dotfiles/wm
     mode: a+x
 
-- name: Install wm
+- name: Install skhd
   community.general.homebrew:
     name:
-      - koekeishiya/formulae/yabai
       - skhd
     state: present
-
-
-- name: Install Spacebar
-  community.general.homebrew:
-    name:
-      - cmacrae/formulae/spacebar
-    state: present
-
-- name: Install font
-  community.general.homebrew_cask:
-    name:
-      - homebrew/cask-fonts/font-hasklug-nerd-font
-    state: present
-
-- name: Copy Spacebar config
-  ansible.builtin.copy:
-    src: "{{ ansible_env.PWD }}/roles/wm/files/spacebarrc"
-    dest: ~/.config/spacebar/spacebarrc
-
-
-- name: Start Spacebar
-  command: /usr/local/bin/brew services stop spacebar
-  when: ansible_os_family == "Darwin"
 
 - name: Copy skhd config
   ansible.builtin.copy:
     src: "{{ ansible_env.PWD }}/roles/wm/files/skhdrc"
-    dest: ~/.skhdrc
-
-- name: Copy yabai config
-  ansible.builtin.copy:
-    src: "{{ ansible_env.PWD }}/roles/wm/files/yabairc"
-    dest: ~/.config/yabai/yabairc
-
-- name: Install yabai scripting addition
-  ansible.builtin.command:
-    cmd: yabai --install-sa 
-  ignore_errors: true
-
-- name: Start brew service yabai
-  ansible.builtin.command:
-    cmd: /usr/local/bin/brew services stop yabai
-  when: ansible_os_family == "Darwin"
+    dest: ~/.config/skhd/skhdrc
 
 - name: Start brew service skhd
   ansible.builtin.command:

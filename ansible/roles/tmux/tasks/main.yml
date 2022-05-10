@@ -4,23 +4,18 @@
       - tmux
       - reattach-to-user-namespace
       - xwmx/taps/pb
+      - fpp
     state: present
 
 - name: Checkout tmux config
   ansible.builtin.git:
-    repo: 'https://github.com/gpakosz/.tmux.git'
-    dest: ~/.tmux
-
-- name: Install tmux config
-  ansible.builtin.file:
-    src: ~/.tmux/.tmux.conf
-    path: ~/.tmux.conf
-    state: link
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: ~/.config/tmux/plugins/tpm
 
 - name: Create tmux config
   ansible.builtin.template:
-    src: tmux.conf.local.j2
-    dest: ~/.tmux.conf.local
+    src: tmux.conf.j2
+    dest: ~/.config/tmux/tmux.conf
     owner: "{{ lookup('env', 'USER') }}"
     group: staff
     mode: '0644'

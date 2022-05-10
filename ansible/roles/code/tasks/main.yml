@@ -13,17 +13,26 @@
     state: present
 
 - name: Install xdebug
-  ansible.builtin.command:
-    cmd: pecl install xdebug
+  community.general.pear:
+    name: pecl/xdebug
+    state: present
+
+- name: Stat symfony-cli
+  stat:
+    path: /usr/local/bin/symfony
+  register: symfony
 
 - name: Download symfony-cli
   ansible.builtin.get_url:
     url: https://get.symfony.com/cli/installer
     dest: /tmp/symfony-installer
+  when: symfony.stat.exists == False
 
 - name: Install symfony-cli
   ansible.builtin.command:
     cmd: bash /tmp/symfony-installer
+  when: symfony.stat.exists == False
+
 
 - name: Copy to system location
   ansible.builtin.copy:
@@ -32,7 +41,9 @@
     owner: kreemer
     group: admin
     mode: '0755'
+  when: symfony.stat.exists == False
 
+    
 - name: Install phpstorm
   community.general.homebrew_cask:
     name:

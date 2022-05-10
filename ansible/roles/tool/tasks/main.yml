@@ -3,12 +3,12 @@
     name:
       - 1password
       - forticlient-vpn
-      - playonmac 
+        #      - playonmac 
       - discord
       - plexamp
       - nextcloud
-      - tiled
+        #- tiled
       - visual-studio-code
-      - steam
-      - obsidian
+        #- steam
+        #- obsidian
     state: present

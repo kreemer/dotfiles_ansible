@@ -2,23 +2,20 @@
   community.general.homebrew:
     name:
       - zsh
+      - zsh-autosuggestions
+      - zsh-completions
       - vivid
       - coreutils
+      - oh-my-posh
     state: present
 
-- name: Install iTerm2
-  community.general.homebrew_cask:
-    name:
-      - iterm2
-      - homebrew/cask-fonts/font-hack
-    state: present
-
-
-- name: Create local directory
+- name: Create directories
   ansible.builtin.file:
-    path: ~/.dotfiles/terminal
+    path: "{{item}}"
     state: directory
     mode: '0755'
+  with_items:
+      - [ "~/.config/oh-my-posh","~/.config/kitty", "~/.config/zsh"]
 
 - name: Download oh-my-zsh installer
   ansible.builtin.get_url:
@@ -26,52 +23,77 @@
     dest: /tmp/oh-my-zsh.sh
 
 - name: Install oh-my-zsh
-  ansible.builtin.command:
-    cmd: bash /tmp/oh-my-zsh.sh
-    creates: ~/.oh-my-zsh
+  ansible.builtin.shell:
+    cmd: ZSH=~/.config/oh-my-zsh sh /tmp/oh-my-zsh.sh
+    creates: ~/.config/oh-my-zsh
+
+- name: Update .zshrc global
+  ansible.builtin.template:
+    src: global-zshrc.j2
+    dest: /etc/zshrc 
+    owner: root
+    group: wheel 
+    mode: '0444'
+    backup: no
+  become: true
+
 
 - name: Update .zshrc
   ansible.builtin.template:
     src: zshrc.j2
-    dest: ~/.zshrc
+    dest: ~/.config/zsh/.zshrc
     owner: "{{ lookup('env', 'USER') }}"
     group: staff
     mode: '0644'
     backup: yes
 
-- name: Checkout iTerm2 Theme
-  ansible.builtin.git:
-    repo: 'https://github.com/mbadolato/iTerm2-Color-Schemes.git'
-    dest: ~/.dotfiles/terminal/iterm2-color-schemes
-
-- name: Import theme
-  ansible.builtin.command:
-    cmd: ~/.dotfiles/terminal/iterm2-color-schemes/tools/import-scheme.sh 'DimmedMonokai'
-
-- name: Save profile
-  ansible.builtin.copy:
-    src: "{{ ansible_env.PWD }}/roles/terminal/files/com.googlecode.iterm2.plist"
-    dest: ~/Library/Preferences/com.googlecode.iterm2.plist
-
-
 - name: Install zsh-completions
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-completions'
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
+    dest: ~/.config/oh-my-zsh/custom/plugins/zsh-completions
 
 - name: Create my-completions plugin
   ansible.builtin.file:
-    path: ~/.oh-my-zsh/custom/plugins/my-completions
+    path: ~/.config/oh-my-zsh/custom/plugins/my-completions
     state: directory
     mode: '0755'
 
 - name: Create my-completions src plugin
   ansible.builtin.file:
-    path: ~/.oh-my-zsh/custom/plugins/my-completions/src
+    path: ~/.config/oh-my-zsh/custom/plugins/my-completions/src
     state: directory
     mode: '0755'
 
 - name: Copy my-completions plugin
   ansible.builtin.copy:
     src: "{{ ansible_env.PWD }}/roles/terminal/files/my-completions.plugin.zsh"
-    dest: ~/.oh-my-zsh/custom/plugins/my-completions/my-completions.plugin.zsh
+    dest: ~/.config/oh-my-zsh/custom/plugins/my-completions/my-completions.plugin.zsh
+
+- name: Tab fonts cask
+  community.general.homebrew_tap:
+    name: homebrew/cask-fonts
+
+- name: Install fonts
+  community.general.homebrew_cask:
+    name:
+      - font-fira-code
+      - font-fantasque-sans-mono-nerd-font
+
+- name: Install kitty
+  community.general.homebrew_cask:
+    name:
+      - kitty
+    state: present
+
+- name: Copy kitty.conf 
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/terminal/files/kitty.conf"
+    dest: ~/.config/kitty/kitty.conf
+
+- name: Copy oh-my-posh theme
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/terminal/files/theme.omp.json"
+    dest: ~/.config/oh-my-posh/theme.omp.json
+
+
+
