@@ -27,8 +27,8 @@ vim.opt.cindent = true
 
 lvim.builtin.lualine.theme = "gruvbox-material"
 lvim.builtin.lualine.sections.lualine_y = { "spaces", {
-  "fileformat",
-  icons_enabled = false
+    "fileformat",
+    icons_enabled = false
 }, "encoding", "filetype" }
 lvim.builtin.lualine.sections.lualine_z = { "progress", "location" }
 vim.g.tokyonight_style = "night"
@@ -42,7 +42,7 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<leader>dU"] = ":lua require'dapui'.toggle()<cr>"
-
+lvim.keys.normal_mode["<leader>bq"] = ":bp|bd#<cr>"
 
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
@@ -61,7 +61,7 @@ vim.cmd([[
 
 
 lvim.builtin.which_key.mappings["z"] = {
-  "<cmd>:Goyo<CR>", "Zen Mode"
+    "<cmd>:Goyo<CR>", "Zen Mode"
 }
 
 
@@ -70,18 +70,18 @@ lvim.builtin.which_key.mappings["z"] = {
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
-  -- for input mode
-  i = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-    ["<C-n>"] = actions.cycle_history_next,
-    ["<C-p>"] = actions.cycle_history_prev,
-  },
-  -- for normal mode
-  n = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-  },
+    -- for input mode
+    i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+    },
+    -- for normal mode
+    n = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+    },
 }
 
 
@@ -89,31 +89,31 @@ lvim.builtin.telescope.defaults.mappings = {
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 lvim.builtin.which_key.mappings["o"] = {
-  name = "+Octo",
-  i = { "<cmd>Octo issue list<cr>", "Issues" },
-  p = { "<cmd>Octo pr list<cr>", "PR" },
+    name = "+Octo",
+    i = { "<cmd>Octo issue list<cr>", "Issues" },
+    p = { "<cmd>Octo pr list<cr>", "PR" },
 }
 
 
 lvim.builtin.which_key.mappings["t"] = {
-  name = "+Tests",
-  t = { "<cmd>TestNearest<cr>", "Test nearest method" },
-  f = { "<cmd>TestFile<cr>", "Test file" },
-  a = { "<cmd>TestSuite<cr>", "Test suite" },
-  l = { "<cmd>TestLast<cr>", "Test last" },
-  g = { "<cmd>TestVisit<cr>", "Test visited" },
-  s = { "<cmd>PHPUnitSwitchFile<cr>", "Switch to test/src class" },
+    name = "+Tests",
+    t = { "<cmd>TestNearest<cr>", "Test nearest method" },
+    f = { "<cmd>TestFile<cr>", "Test file" },
+    a = { "<cmd>TestSuite<cr>", "Test suite" },
+    l = { "<cmd>TestLast<cr>", "Test last" },
+    g = { "<cmd>TestVisit<cr>", "Test visited" },
+    s = { "<cmd>PHPUnitSwitchFile<cr>", "Switch to test/src class" },
 }
 
 
 lvim.builtin.which_key.mappings["T"] = {
-  name = "+Trouble",
-   r = { "<cmd>Trouble lsp_references<cr>", "References" },
-   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
-   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+    name = "+Trouble",
+    r = { "<cmd>Trouble lsp_references<cr>", "References" },
+    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+    d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
 
 -- TODO: User Config for predefined plugins
@@ -129,19 +129,19 @@ lvim.builtin.dap.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
-  "php",
+    "bash",
+    "c",
+    "javascript",
+    "json",
+    "lua",
+    "python",
+    "typescript",
+    "tsx",
+    "css",
+    "rust",
+    "java",
+    "yaml",
+    "php",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -149,48 +149,48 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 
 lvim.builtin.treesitter.textobjects = {
-  select = {
-    enable = true,
-    -- Automatically jump forward to textobj, similar to targets.vim
-    lookahead = true,
+    select = {
+        enable = true,
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
 
-    keymaps = {
-      -- You can use the capture groups defined in textobjects.scm
-      ["af"] = "@function.outer",
-      ["if"] = "@function.inner",
-      ["ac"] = "@class.outer",
-      ["ic"] = "@class.inner",
+        keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+        },
     },
-  },
-  swap = {
-    enable = true,
-    swap_next = {
-      ["<leader>a"] = "@parameter.inner",
+    swap = {
+        enable = true,
+        swap_next = {
+            ["<leader>a"] = "@parameter.inner",
+        },
+        swap_previous = {
+            ["<leader>A"] = "@parameter.inner",
+        },
     },
-    swap_previous = {
-      ["<leader>A"] = "@parameter.inner",
+    move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+            ["]m"] = "@function.outer",
+            ["]["] = "@class.outer",
+        },
+        goto_next_end = {
+            ["]M"] = "@function.outer",
+            ["]]"] = "@class.outer",
+        },
+        goto_previous_start = {
+            ["[m"] = "@function.outer",
+            ["[["] = "@class.outer",
+        },
+        goto_previous_end = {
+            ["[M"] = "@function.outer",
+            ["[]"] = "@class.outer",
+        },
     },
-  },
-  move = {
-    enable = true,
-    set_jumps = true, -- whether to set jumps in the jumplist
-    goto_next_start = {
-      ["]m"] = "@function.outer",
-      ["]["] = "@class.outer",
-    },
-    goto_next_end = {
-      ["]M"] = "@function.outer",
-      ["]]"] = "@class.outer",
-    },
-    goto_previous_start = {
-      ["[m"] = "@function.outer",
-      ["[["] = "@class.outer",
-    },
-    goto_previous_end = {
-      ["[M"] = "@function.outer",
-      ["[]"] = "@class.outer",
-    },
-  },
 }
 
 -- Add lables to the textobjects keybindings
@@ -228,61 +228,61 @@ lvim.builtin.treesitter.textobjects = {
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "phpcsfixer", filetypes = { "php" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
+    { command = "phpcsfixer", filetypes = { "php" } },
+    --   { command = "isort", filetypes = { "python" } },
+    --   {
+    --     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    --     command = "prettier",
+    --     ---@usage arguments to pass to the formatter
+    --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    --     extra_args = { "--print-with", "100" },
+    --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    --     filetypes = { "typescript", "typescriptreact" },
+    --   },
 }
 
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "phpstan", filetypes = { "php" } },
-  { command = "twigcs" },
---   {
---     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "shellcheck",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--severity", "warning" },
---   },
---   {
---     command = "codespell",
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "javascript", "python" },
---   },
+    { command = "phpstan", filetypes = { "php" } },
+    { command = "twigcs" },
+    --   {
+    --     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    --     command = "shellcheck",
+    --     ---@usage arguments to pass to the formatter
+    --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    --     extra_args = { "--severity", "warning" },
+    --   },
+    --   {
+    --     command = "codespell",
+    --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    --     filetypes = { "javascript", "python" },
+    --   },
 }
 
 -- DAP
 
 local dap = require('dap')
 dap.adapters.php = {
-  type = 'executable',
-  command = 'node',
-  args = { '/Users/kreemer/.local/vscode-php-debug/out/phpDebug.js' }
+    type = 'executable',
+    command = 'node',
+    args = { '/Users/kreemer/.local/vscode-php-debug/out/phpDebug.js' }
 }
 
 dap.configurations.php = {
-  {
-    type = 'php',
-    request = 'launch',
-    name = 'Listen for Xdebug',
-    port = 9003
-  }
+    {
+        type = 'php',
+        request = 'launch',
+        name = 'Listen for Xdebug',
+        port = 9003
+    }
 }
 
 
 
 -- Additional Plugins
 lvim.plugins = {
-    {"tanvirtin/monokai.nvim"},
+    { "tanvirtin/monokai.nvim" },
     {
         "vim-test/vim-test",
         setup = function()
@@ -292,9 +292,9 @@ lvim.plugins = {
                 ]])
         end
     },
-    {"ellisonleao/glow.nvim"},
-    {"kreemer/vim-phpunit"},
-    {"nelsyeung/twig.vim"},
+    { "ellisonleao/glow.nvim" },
+    { "kreemer/vim-phpunit" },
+    { "nelsyeung/twig.vim" },
     {
         "nvim-treesitter/playground",
         event = "BufRead",
@@ -302,7 +302,7 @@ lvim.plugins = {
     {
         "romgrk/nvim-treesitter-context",
         config = function()
-            require("treesitter-context").setup{
+            require("treesitter-context").setup {
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
                 throttle = true, -- Throttles plugin updates (may improve performance)
                 max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
@@ -319,75 +319,75 @@ lvim.plugins = {
                 },
             }
         end
-    }, 
+    },
     {
-      "stephpy/vim-php-cs-fixer",
-      setup = function()
-        vim.g.php_cs_fixer_enable_default_mapping = 0
-    end,
-      config = function()
-        vim.cmd([[
+        "stephpy/vim-php-cs-fixer",
+        setup = function()
+            vim.g.php_cs_fixer_enable_default_mapping = 0
+        end,
+        config = function()
+            vim.cmd([[
             nnoremap <silent><leader>ufd :call PhpCsFixerFixDirectory()<CR>
             nnoremap <silent><leader>uff :call PhpCsFixerFixFile()<CR>
-        ]])
-    end
+        ]]   )
+        end
     },
-    {"junegunn/goyo.vim"},
-    {"reedes/vim-lexical"},
+    { "junegunn/goyo.vim" },
+    { "reedes/vim-lexical" },
     {
         "dhruvasagar/vim-table-mode",
-        setup = function ()
+        setup = function()
             vim.g.table_mode_map_prefix = '<leader>m'
         end
     },
     {
-      "RishabhRD/nvim-cheat.sh",
-      requires = "RishabhRD/popfix",
-      config = function()
-        vim.g.cheat_default_window_layout = "vertical_split"
-      end,
+        "RishabhRD/nvim-cheat.sh",
+        requires = "RishabhRD/popfix",
+        config = function()
+            vim.g.cheat_default_window_layout = "vertical_split"
+        end,
     },
     {
-      "AckslD/nvim-neoclip.lua",
-      requires = {
-        {'tami5/sqlite.lua', module = 'sqlite'},
-        {'nvim-telescope/telescope.nvim'},
-      },
-      config = function()
-        require('neoclip').setup()
-      end,
+        "AckslD/nvim-neoclip.lua",
+        requires = {
+            { 'tami5/sqlite.lua', module = 'sqlite' },
+            { 'nvim-telescope/telescope.nvim' },
+        },
+        config = function()
+            require('neoclip').setup()
+        end,
     },
     {
-      "rcarriga/nvim-dap-ui",
-      config = function()
-        require("dapui").setup()
-      end,
-      ft = { "php"},
-      event = "BufReadPost",
-      -- requires = { "mfussenegger/nvim-dap" },
-      disable = not lvim.builtin.dap.active,
+        "rcarriga/nvim-dap-ui",
+        config = function()
+            require("dapui").setup()
+        end,
+        ft = { "php" },
+        event = "BufReadPost",
+        -- requires = { "mfussenegger/nvim-dap" },
+        disable = not lvim.builtin.dap.active,
     },
     {
-      "pwntester/octo.nvim",
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
-        'kyazdani42/nvim-web-devicons',
-      },
-      config = function ()
-        require"octo".setup()
-      end
+        "pwntester/octo.nvim",
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = function()
+            require "octo".setup()
+        end
     },
     {
-      "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  config = function()
-    require("trouble").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  end
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
     },
     {
         "ray-x/lsp_signature.nvim",
@@ -403,8 +403,8 @@ lvim.plugins = {
     -- { "ludovicchabant/vim-gutentags" },
     -- { "arnaud-lb/vim-php-namespace" }
 
-    
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
+
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
 
 }
 

@@ -3,7 +3,11 @@
     name:
       - git
       - diff-so-fancy
+      - git-lfs
     state: present
+
+- name: Install git-lfs
+  ansible.builtin.command: git lfs install
 
 - name: Install gitconfig
   ansible.builtin.template:

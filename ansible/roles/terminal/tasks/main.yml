@@ -10,6 +10,7 @@
       - bat
       - exa
       - tldr
+      - neofetch
     state: present
 
 - name: Create directories

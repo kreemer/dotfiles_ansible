@@ -10,6 +10,7 @@
       - python3
       - pkg-config
       - imagemagick
+      - mkdocs
     state: present
 
 - name: Install virtualbox
