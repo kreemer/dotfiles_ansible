@@ -11,6 +11,7 @@
       - pkg-config
       - imagemagick
       - mkdocs
+      - plantuml
     state: present
 
 - name: Install virtualbox

@@ -2,6 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+
 export ZSHZ_DATA=$HOME/.config/z
 export ZSHZ_ECHO=1
 
@@ -114,19 +116,7 @@ export LS_COLORS="$(vivid generate dracula)"
 
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
-   
-    #tmux has-session -t development
-    #if [ $? != 0 ]; then
-    #    tmux new-session -s development -n editor -d
-    #    tmux send-keys -t development 'cd ~/Code' C-m
-    #    tmux split-window -v -t development
-    #    tmux split-window -v -t development
-    #    tmux select-layout -t development main-horizontal
-    #    tmux new-window -n console -t development
-    #    tmux select-window -t development:0
-    #fi
     tmux attach -t TMUX || tmux new -s TMUX -d && tmux send-keys -t TMUX 'clear && neofetch' C-m && tmux attach -t TMUX
-
 fi
 
 [ -z "$SSH_AUTH_SOCK"  ] && eval "$(ssh-agent -s)"

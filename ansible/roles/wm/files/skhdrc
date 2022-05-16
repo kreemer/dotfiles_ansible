@@ -1,2 +1,2 @@
 # opens Terminal
-cmd - return : osascript ~/.dotfiles/wm/open_kitty.scpt
+cmd - return : /Applications/Alacritty.app

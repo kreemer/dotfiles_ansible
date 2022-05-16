@@ -1,10 +1,10 @@
 --[[
-lvim is the global options object
+    lvim is the global options object
 
-inters should be
-filled in as strings with either
-a global executable or a path to
-an executable
+    inters should be
+    filled in as strings with either
+    a global executable or a path to
+    an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
@@ -17,18 +17,16 @@ local set = vim.opt -- set options
 set.tabstop = 4
 set.softtabstop = 4
 set.shiftwidth = 4
-set.spelllang = "de"
-
 
 
 -- add a highlighted column
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "80"
 vim.opt.cindent = true
 
 lvim.builtin.lualine.theme = "gruvbox-material"
 lvim.builtin.lualine.sections.lualine_y = { "spaces", {
     "fileformat",
-    icons_enabled = false
+    icons_enabled = true
 }, "encoding", "filetype" }
 lvim.builtin.lualine.sections.lualine_z = { "progress", "location" }
 vim.g.tokyonight_style = "night"
@@ -40,29 +38,24 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<leader>dU"] = ":lua require'dapui'.toggle()<cr>"
-lvim.keys.normal_mode["<leader>bq"] = ":bp|bd#<cr>"
 
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
+vim.g.goyo_width = "80%"
+lvim.keys.normal_mode["d"] = '"_d'
+lvim.keys.normal_mode["D"] = '"_D'
+lvim.keys.visual_mode["d"] = '"_d'
+lvim.keys.normal_mode["<del>"] = '<C-G>"_x'
+lvim.keys.visual_mode["p"] = 'pgvy'
 
-vim.cmd([[
-    let g:goyo_width="80%"
-    nnoremap { 'd', '"_d' }
-    nnoremap { 'D', '"_D' }
-    vnoremap { 'd', '"_d' }
-    nnoremap { '<del>', '<C-G>"_x' }
-    xnoremap { 'p', 'pgvy' }
-]])
+lvim.keys.normal_mode["<C-w>t"] = "<cmd>Twilight<cr>"
+lvim.keys.normal_mode["<C-w>z"] = "<cmd>:Goyo<CR>"
 
-
-lvim.builtin.which_key.mappings["z"] = {
-    "<cmd>:Goyo<CR>", "Zen Mode"
-}
+lvim.keys.visual_mode["p"] = '"_dp'
+lvim.keys.visual_mode["P"] = '"_dP'
 
 
 
@@ -86,23 +79,55 @@ lvim.builtin.telescope.defaults.mappings = {
 
 
 -- Use which-key to add extra bindings with the leader-key prefix
+
+
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
-lvim.builtin.which_key.mappings["o"] = {
-    name = "+Octo",
-    i = { "<cmd>Octo issue list<cr>", "Issues" },
-    p = { "<cmd>Octo pr list<cr>", "PR" },
+lvim.builtin.which_key.mappings["g"] = false
+lvim.builtin.which_key.mappings["g"] = {
+    name = "+Git",
+    a = { "<cmd>Git add %:p<CR><CR>", "Add" },
+    s = { "<cmd>Git<CR>", "Status" },
+    c = { "<cmd>Git commit -v -q<CR>", "Commit" },
+    d = { "<cmd>Git diff<CR>", "Diff" },
+    e = { "<cmd>Git edit<CR>", "Edit" },
+    r = { "<cmd>Git read<CR>", "Read" },
+    w = { "<cmd>Git write<CR><CR>", "Write" },
+    l = { "<cmd>silent! Gclog<CR>:bot copen<CR>", "clog" },
+    p = { "<cmd>Ggrep<Space>", "Grep" },
+    m = { "<cmd>Gmove<Space>", "Move" },
+    b = { "<cmd>Git branch<Space>", "Branch" },
+    o = { "<cmd>Git checkout<Space><CR>", "Checkout" },
+    ps = { "<cmd>Dispatch! git push<CR>", "Push" },
+    pl = { "<cmd>Dispatch! git pull<CR>", "Pull" },
+    g = {
+        name = "+GitHub",
+        i = { "<cmd>Octo issue list<cr>", "Issues" },
+        p = { "<cmd>Octo pr list<cr>", "PR" },
+    }
 }
 
+lvim.builtin.which_key.mappings["u"] = {
+    name = "+Code",
+    d = {
+        name = "+Debug",
+        U = { ":lua require'dapui'.toggle()<cr>", "Open dapui" },
+    },
+    t = {
+        name = "+Tests",
+        t = { "<cmd>TestNearest<cr>", "Test nearest method" },
+        f = { "<cmd>TestFile<cr>", "Test file" },
+        a = { "<cmd>TestSuite<cr>", "Test suite" },
+        l = { "<cmd>TestLast<cr>", "Test last" },
+        g = { "<cmd>TestVisit<cr>", "Test visited" },
+        s = { "<cmd>PHPUnitSwitchFile<cr>", "Switch to test/src class" },
+    },
+    f = {
+        name = "+php-cs-fixer",
+        d = { "<cmd>call PhpCsFixerFixDirectory()<CR>", "Fix directory" },
+        f = { "<cmd>call PhpCsFixerFixFile()<CR>", "Fix file" },
+    }
 
-lvim.builtin.which_key.mappings["t"] = {
-    name = "+Tests",
-    t = { "<cmd>TestNearest<cr>", "Test nearest method" },
-    f = { "<cmd>TestFile<cr>", "Test file" },
-    a = { "<cmd>TestSuite<cr>", "Test suite" },
-    l = { "<cmd>TestLast<cr>", "Test last" },
-    g = { "<cmd>TestVisit<cr>", "Test visited" },
-    s = { "<cmd>PHPUnitSwitchFile<cr>", "Switch to test/src class" },
 }
 
 
@@ -110,10 +135,10 @@ lvim.builtin.which_key.mappings["T"] = {
     name = "+Trouble",
     r = { "<cmd>Trouble lsp_references<cr>", "References" },
     f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-    d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
     q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
     l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-    w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Diagnostics" },
 }
 
 -- TODO: User Config for predefined plugins
@@ -163,7 +188,7 @@ lvim.builtin.treesitter.textobjects = {
         },
     },
     swap = {
-        enable = true,
+        enable = false,
         swap_next = {
             ["<leader>a"] = "@parameter.inner",
         },
@@ -229,6 +254,7 @@ lvim.builtin.treesitter.textobjects = {
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
     { command = "phpcsfixer", filetypes = { "php" } },
+    { command = "markdownlint", filetypes = { "markdown" } },
     --   { command = "isort", filetypes = { "python" } },
     --   {
     --     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
@@ -282,19 +308,80 @@ dap.configurations.php = {
 
 -- Additional Plugins
 lvim.plugins = {
-    { "tanvirtin/monokai.nvim" },
+    -- General
+    { "reedes/vim-lexical" },
     {
-        "vim-test/vim-test",
-        setup = function()
-            vim.cmd([[
-                let test#strategy = "neovim"
-                let test#php#phpunit#executable = 'SYMFONY_DEPRECATIONS_HELPER=verbose=0 phpunit'
-                ]])
+        "AckslD/nvim-neoclip.lua",
+        requires = {
+            { 'tami5/sqlite.lua', module = 'sqlite' },
+            { 'nvim-telescope/telescope.nvim' },
+        },
+        config = function()
+            require('neoclip').setup()
+        end,
+    },
+    {
+        "tpope/vim-fugitive",
+        cmd = {
+            "G",
+            "Git",
+            "Gdiffsplit",
+            "Gread",
+            "Gwrite",
+            "Ggrep",
+            "GMove",
+            "GDelete",
+            "GBrowse",
+            "GRemove",
+            "GRename",
+            "Glgrep",
+            "Gedit"
+        },
+        ft = { "fugitive" }
+    },
+    {
+        "pwntester/octo.nvim",
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = function()
+            require "octo".setup()
         end
     },
-    { "ellisonleao/glow.nvim" },
-    { "kreemer/vim-phpunit" },
-    { "nelsyeung/twig.vim" },
+    {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    },
+    {
+        "ggandor/lightspeed.nvim"
+    },
+    -- UI
+    { "tanvirtin/monokai.nvim" },
+    { "junegunn/goyo.vim" },
+    {
+        "folke/twilight.nvim",
+        config = function()
+            require("twilight").setup {
+                context = 12,
+            }
+        end
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("plugins.indent_blankline").config()
+        end
+    },
+    -- Treesitter
     {
         "nvim-treesitter/playground",
         event = "BufRead",
@@ -321,42 +408,30 @@ lvim.plugins = {
         end
     },
     {
+        "nvim-treesitter/nvim-treesitter-textobjects"
+    },
+    -- PHP
+    {
+        "vim-test/vim-test",
+        setup = function()
+            vim.cmd([[
+                    let test#strategy = "neovim"
+                    let test#php#phpunit#executable = 'SYMFONY_DEPRECATIONS_HELPER=verbose=0 phpunit'
+            ]])
+        end
+    },
+    { "kreemer/vim-phpunit" },
+    {
         "stephpy/vim-php-cs-fixer",
         setup = function()
             vim.g.php_cs_fixer_enable_default_mapping = 0
-        end,
-        config = function()
-            vim.cmd([[
-            nnoremap <silent><leader>ufd :call PhpCsFixerFixDirectory()<CR>
-            nnoremap <silent><leader>uff :call PhpCsFixerFixFile()<CR>
-        ]]   )
         end
     },
-    { "junegunn/goyo.vim" },
-    { "reedes/vim-lexical" },
-    {
-        "dhruvasagar/vim-table-mode",
-        setup = function()
-            vim.g.table_mode_map_prefix = '<leader>m'
-        end
-    },
-    {
-        "RishabhRD/nvim-cheat.sh",
-        requires = "RishabhRD/popfix",
-        config = function()
-            vim.g.cheat_default_window_layout = "vertical_split"
-        end,
-    },
-    {
-        "AckslD/nvim-neoclip.lua",
-        requires = {
-            { 'tami5/sqlite.lua', module = 'sqlite' },
-            { 'nvim-telescope/telescope.nvim' },
-        },
-        config = function()
-            require('neoclip').setup()
-        end,
-    },
+    -- Markdown -------------------------------------------------------------------------
+    { "ellisonleao/glow.nvim" },
+    -- Twig -----------------------------------------------------------------------------
+    { "nelsyeung/twig.vim" },
+    -- LSP & DAP ------------------------------------------------------------------------
     {
         "rcarriga/nvim-dap-ui",
         config = function()
@@ -368,50 +443,13 @@ lvim.plugins = {
         disable = not lvim.builtin.dap.active,
     },
     {
-        "pwntester/octo.nvim",
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
-            'kyazdani42/nvim-web-devicons',
-        },
-        config = function()
-            require "octo".setup()
-        end
-    },
-    {
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = function()
-            require("trouble").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    },
-    {
         "ray-x/lsp_signature.nvim",
         event = "BufRead",
         config = function()
             require "lsp_signature".setup()
         end
     },
-    {
-        "ggandor/lightspeed.nvim",
-        event = "BufRead",
-    },
-    -- { "ludovicchabant/vim-gutentags" },
-    -- { "arnaud-lb/vim-php-namespace" }
-
-
-    { "nvim-treesitter/nvim-treesitter-textobjects" },
-
 }
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
 
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").load({ paths = "~/Code/kreemer/vs-code-snippets" })

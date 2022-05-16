@@ -31,6 +31,43 @@
     mode: '0644'
     backup: yes
 
+
+- name: Create ftplugin after directory
+  ansible.builtin.file:
+    path: ~/.config/lvim/after/ftplugin
+    state: directory
+    mode: '0755'
+    recurse: yes
+
+- name: Copy markdown file
+  ansible.builtin.template:
+    src: markdown.lua.j2
+    dest: ~/.config/lvim/after/ftplugin/markdown.lua
+    owner: "{{ lookup('env', 'USER') }}"
+    group: staff
+    mode: '0644'
+    backup: yes
+
+- name: Create spell directory
+  ansible.builtin.file:
+    path: ~/.config/lvim/spell
+    state: directory
+    mode: '0755'
+    recurse: yes
+
+- name: Copy spell file
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/lvim/files/de.utf-8.spl"
+    dest: ~/.config/lvim/spell/de.utf-8.spl
+
+
+- name: Copy lua file
+  ansible.builtin.copy:
+    src: "{{ ansible_env.PWD }}/roles/lvim/files/lua"
+    dest: ~/.config/lvim/lua
+
+ 
+ 
 - name: Update lunarvim
   ansible.builtin.shell:
     cmd: ~/.local/bin/lvim +LvimUpdate +PackerUpdate +LvimSyncCorePlugins +q

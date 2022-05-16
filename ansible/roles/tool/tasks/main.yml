@@ -8,6 +8,7 @@
       - nextcloud
       - visual-studio-code
       - steam
+      - openttd
     state: present
 
 - name: Install macos tools

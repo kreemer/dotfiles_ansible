@@ -1,0 +1,10 @@
+-- lua
+
+vim.cmd([[
+:set wrap linebreak nolist
+:set spell spelllang=de_CH
+:set spell spellfile=~/.config/lvim/spell/de.utf-8.add
+
+noremap <expr> k (v:count == 0 ? 'gk' : 'k')
+noremap <expr> j (v:count == 0 ? 'gj' : 'j')
+]])

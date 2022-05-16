@@ -19,7 +19,7 @@
     state: directory
     mode: '0755'
   with_items:
-      - [ "~/.config/oh-my-posh","~/.config/kitty", "~/.config/zsh"]
+      - [ "~/.config/oh-my-posh","~/.config/alacritty", "~/.config/zsh"]
 
 - name: Download oh-my-zsh installer
   ansible.builtin.get_url:
@@ -82,17 +82,18 @@
     name:
       - font-fira-code
       - font-fantasque-sans-mono-nerd-font
+      - font-jetbrains-mono-nerd-font
 
-- name: Install kitty
+- name: Install Alacritty
   community.general.homebrew_cask:
     name:
-      - kitty
+      - alacritty
     state: present
 
-- name: Copy kitty.conf 
+- name: Copy alacritty.conf 
   ansible.builtin.copy:
-    src: "{{ ansible_env.PWD }}/roles/terminal/files/kitty.conf"
-    dest: ~/.config/kitty/kitty.conf
+    src: "{{ ansible_env.PWD }}/roles/terminal/files/alacritty.yml"
+    dest: ~/.config/alacritty/alacritty.yml
 
 - name: Copy oh-my-posh theme
   ansible.builtin.copy:

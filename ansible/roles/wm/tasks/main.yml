@@ -1,20 +1,8 @@
-- name: Create local directory
-  ansible.builtin.file:
-    path: ~/.dotfiles/wm
-    state: directory
-    mode: '0755'
-
 - name: Create skhd config directory
   ansible.builtin.file:
     path: ~/.config/skhd
     state: directory
     mode: '0755'
-
-- name: Copy scripts
-  ansible.builtin.copy:
-    src: "{{ ansible_env.PWD }}/roles/wm/files/scripts/"
-    dest: ~/.dotfiles/wm
-    mode: a+x
 
 - name: Install skhd
   community.general.homebrew:
